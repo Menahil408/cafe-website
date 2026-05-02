@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Café Paragon — Where Perfection is Served</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="cur" id="cur"></div>
+  <div class="cur-ring" id="curRing"></div>
+  <div class="noise"></div>
+  <canvas id="c3d"></canvas>
+  <div id="pt"></div>
+
+  <!-- ─── NAVBAR ─── -->
+  <nav id="nav">
+    <div class="n-logo" onclick="go('home')">
+      <div class="n-mark"><span class="n-p">P</span></div>
+      <div class="n-brand">
+        <span class="b">Paragon</span>
+        <span class="t">Café &amp; Tea Leaf</span>
+      </div>
+    </div>
+    <ul class="n-links" id="nLinks">
+      <li><a onclick="go('home')" class="nl" data-p="home">Home</a></li>
+      <li><a onclick="go('menu')" class="nl" data-p="menu">Menu</a></li>
+      <li><a onclick="go('about')" class="nl" data-p="about">Our Story</a></li>
+      <li><a onclick="go('locations')" class="nl" data-p="locations">Locations</a></li>
+      <li><a onclick="go('locations')" class="nl n-cta">Reserve a Table</a></li>
+    </ul>
+    <button class="cart-btn" onclick="toggleCart()" style="margin-left:20px">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" style="color:var(--gold)">
+        <path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-1.4 5M17 13l1.4 5M9 18a1 1 0 100 2 1 1 0 000-2zM15 18a1 1 0 100 2 1 1 0 000-2z"/>
+      </svg>
+      <span class="cart-count" id="cartCount">0</span>
+    </button>
+    <div class="hamburger" onclick="toggleNav()"><span></span><span></span><span></span></div>
+  </nav>
+
+  <div id="app">
+
+    <!-- ═══════════════════════════ HOME ═══════════════════════════ -->
+    <div class="page active" id="page-home">
+      <!-- HERO -->
+      <section class="hero">
+        <div class="h-img-wrap">
+           <video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;filter:brightness(.28) saturate(.6)">
+        <source src="videos/hero.video mp4.mp4" type="video/mp4">
+      </video>
+        </div>
+        <div class="h-overlay"></div>
+        <div class="h-content">
+          <div class="h-eye" id="hEye">Lahore · Karachi · Islamabad</div>
+          <h1 class="h-title" id="hTtl">Café<br><em>Paragon</em></h1>
+          <p class="h-sub" id="hSub">Where every cup meets perfection</p>
+          <div class="h-actions" id="hAct">
+            <button class="btn btn-g" onclick="go('menu')"><span>Explore Menu</span></button>
+            <button class="btn btn-o" onclick="go('about')">Our Story</button>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- MARQUEE -->
+      <div class="marq">
+        <div class="marq-track">
+          <span class="marq-item"><span class="marq-dot"></span>Specialty Coffee</span>
+          <span class="marq-item"><span class="marq-dot"></span>Premium Teas</span>
+          <span class="marq-item"><span class="marq-dot"></span>Artisan Cakes</span>
+          <span class="marq-item"><span class="marq-dot"></span>Born in California</span>
+          <span class="marq-item"><span class="marq-dot"></span>Now in Pakistan</span>
+          <span class="marq-item"><span class="marq-dot"></span>Since 1963</span>
+          <span class="marq-item"><span class="marq-dot"></span>Specialty Coffee</span>
+          <span class="marq-item"><span class="marq-dot"></span>Premium Teas</span>
+          <span class="marq-item"><span class="marq-dot"></span>Artisan Cakes</span>
+          <span class="marq-item"><span class="marq-dot"></span>Born in California</span>
+          <span class="marq-item"><span class="marq-dot"></span>Now in Pakistan</span>
+          <span class="marq-item"><span class="marq-dot"></span>Since 1963</span>
+        </div>
+      </div>
+
+      <!-- CATEGORIES -->
+      <section class="sec">
+        <div class="s-label rv">Our Offerings</div>
+        <h2 class="s-title rv">Crafted with<br><em>Purpose</em></h2>
+        <p class="s-sub rv">From single-origin espresso to hand-blended teas and house-made cakes — every item carries the Paragon promise.</p>
+        <div class="cat-grid">
+          <div class="cat-card rv" onclick="go('menu','coffee')">
+            <img class="cat-img" src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=800&q=80" alt="Coffee">
+            <div class="cat-body">
+              <div class="cat-num">01</div>
+              <div class="cat-ttl">Coffee</div>
+              <div class="cat-desc">Espresso, cold brew, lattes &amp; more — sourced from the world's finest farms.</div>
+              <span class="cat-lnk">Discover Coffee</span>
+            </div>
+          </div>
+          <div class="cat-card rv" onclick="go('menu','tea')">
+            <img class="cat-img" src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80" alt="Tea">
+            <div class="cat-body">
+              <div class="cat-num">02</div>
+              <div class="cat-ttl">Tea</div>
+              <div class="cat-desc">20+ varieties from Oolong to Darjeeling, curated for the discerning palate.</div>
+              <span class="cat-lnk">Explore Teas</span>
+            </div>
+          </div>
+          <div class="cat-card rv" onclick="go('menu','cakes')">
+            <img class="cat-img" src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=800&q=80" alt="Cakes">
+            <div class="cat-body">
+              <div class="cat-num">03</div>
+              <div class="cat-ttl">Cakes</div>
+              <div class="cat-desc">Belgian chocolate, lotus cheesecake &amp; seasonal signatures, made fresh daily.</div>
+              <span class="cat-lnk">See Cakes</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- BESTSELLERS -->
+      <section class="sec" style="padding-top:0">
+        <div class="s-label rv">Bestsellers</div>
+        <h2 class="s-title rv">Most <em>Loved</em></h2>
+        <div class="bs-grid">
+          <div class="bs-card rv">
+            <img class="bs-img" src="https://images.unsplash.com/photo-1534778101976-62847782c213?w=600&q=80" alt="Cappuccino">
+            <div class="bs-price">Rs. 650</div>
+            <div class="bs-info"><div class="bs-name">Cappuccino</div><div class="bs-type">Espresso Based</div></div>
+          </div>
+          <div class="bs-card rv">
+            <img class="bs-img" src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=600&q=80" alt="Cold Brew">
+            <div class="bs-price">Rs. 750</div>
+            <div class="bs-info"><div class="bs-name">Cold Brew</div><div class="bs-type">Signature Cold</div></div>
+          </div>
+          <div class="bs-card rv">
+            <img class="bs-img" src="https://images.unsplash.com/photo-1515823662972-da6a2e4d3002?w=600&q=80" alt="Matcha Latte">
+            <div class="bs-price">Rs. 700</div>
+            <div class="bs-info"><div class="bs-name">Matcha Latte</div><div class="bs-type">Tea Series</div></div>
+          </div>
+          <div class="bs-card rv">
+            <img class="bs-img" src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=600&q=80" alt="LA Cheesecake">
+            <div class="bs-price">Rs. 900</div>
+            <div class="bs-info"><div class="bs-name">LA Cheesecake</div><div class="bs-type">Signature Cake</div></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- STORY PREVIEW -->
+      <div class="story rv">
+        <div class="story-vis">
+          <img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=1200&q=80" alt="Interior">
+        </div>
+        <div class="story-txt">
+          <div class="s-label">Our Heritage</div>
+          <h2 class="s-title" style="margin-bottom:0">Rooted in<br><em>Tradition</em></h2>
+          <blockquote class="story-quote">"Every great cup of coffee begins with an obsession — we have never lost ours."</blockquote>
+          <p class="story-body">Founded with the singular promise of serving the perfect cup, Café Paragon has become Pakistan's most refined coffee experience. We source from single-origin farms, roast in small batches, and train every barista as a craftsperson.</p>
+          <button class="btn btn-o" onclick="go('about')" style="align-self:flex-start">Read Our Story</button>
+        </div>
+      </div>
+
+      <!-- STATS -->
+      <div class="stats">
+        <div class="stat rv"><div class="stat-n" data-c="12">0</div><div class="stat-l">Locations</div></div>
+        <div class="stat rv"><div class="stat-n" data-c="30">0</div><div class="stat-l">Tea Varieties</div></div>
+        <div class="stat rv"><div class="stat-n" data-c="6">0</div><div class="stat-l">Signature Cakes</div></div>
+        <div class="stat rv"><div class="stat-n" data-c="60">0</div><div class="stat-l">Years of Heritage</div></div>
+      </div>
+
+      <!-- FOOTER -->
+      <footer>
+        <div class="f-brand">
+          <div class="n-logo"><div class="n-mark"><span class="n-p">P</span></div><div class="n-brand"><span class="b">Paragon</span><span class="t">Café &amp; Tea Leaf</span></div></div>
+          <p>Born in California. Brewed with passion. Served with perfection across Pakistan's finest cities.</p>
+        </div>
+        <div class="f-col"><h4>Navigate</h4><ul><li><a onclick="go('home')">Home</a></li><li><a onclick="go('menu')">Menu</a></li><li><a onclick="go('about')">Our Story</a></li><li><a onclick="go('locations')">Locations</a></li></ul></div>
+        <div class="f-col"><h4>Menu</h4><ul><li><a onclick="go('menu','coffee')">Coffee</a></li><li><a onclick="go('menu','tea')">Tea</a></li><li><a onclick="go('menu','cakes')">Cakes</a></li><li><a onclick="go('menu','cold')">Cold Drinks</a></li></ul></div>
+        <div class="f-col"><h4>Contact</h4><ul><li><a>hello@cafeparagon.pk</a></li><li><a>+92 300 123 4567</a></li><li><a>@cafeparagon</a></li></ul></div>
+      </footer>
+      <div class="f-btm"><p>© 2026 Café Paragon. All rights reserved.</p><p style="color:var(--gold)">Where Perfection is Served</p></div>
+    </div><!-- /home -->
+
+    <!-- ═══════════════════════════ MENU ═══════════════════════════ -->
+    <div class="page" id="page-menu">
+      <div class="pg-hero">
+        <div class="pg-hero-bg"></div><div class="pg-hero-dots"></div>
+        <div class="pg-ttl"><div class="eye">Café Paragon</div><h1>Our <em>Menu</em></h1></div>
+      </div>
+      <div class="m-tabs">
+        <button class="m-tab active" data-f="all"    onclick="fMenu('all',this)">All</button>
+        <button class="m-tab"        data-f="coffee" onclick="fMenu('coffee',this)">Coffee</button>
+        <button class="m-tab"        data-f="cold"   onclick="fMenu('cold',this)">Cold Drinks</button>
+        <button class="m-tab"        data-f="tea"    onclick="fMenu('tea',this)">Tea</button>
+        <button class="m-tab"        data-f="cakes"  onclick="fMenu('cakes',this)">Cakes</button>
+      </div>
+      <div class="m-grid" id="mGrid">
+        <!-- Coffee -->
+        <div class="m-card vis" data-cat="coffee" data-name="Paragon Espresso" data-price="450" data-img="https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?w=600&q=80"><div class="m-img-wrap"><img class="m-img" src="https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?w=600&q=80" alt="Espresso" loading="lazy"></div><div class="m-body"><div class="m-cat">Coffee</div><div class="m-name">Paragon Espresso</div><div class="m-desc">A concentrated shot of our signature blend — bold, rich, perfectly balanced with a velvety crema.</div><div class="m-foot"><span class="m-price">Rs. 450</span><button class="m-order" onclick="addToCart(this.closest('.m-card'))">Order Now</button></div></div></div>
+        <div class="m-card vis" data-cat="coffee" data-name="Cappuccino" data-price="650" data-img="https://images.unsplash.com/photo-1534778101976-62847782c213?w=600&q=80"><div class="m-img-wrap"><img class="m-img" src="https://images.unsplash.com/photo-1534778101976-62847782c213?w=600&q=80" alt="Cappuccino" loading="lazy"></div><div class="m-body"><div class="m-cat">Coffee</div><div class="m-name">Cappuccino</div><div class="m-desc">Equal parts espresso, steamed milk, and silky foam. A classic, always done right.</div><div class="m-foot"><span class="m-price">Rs. 650</span><button class="m-order" onclick="addToCart(this.closest('.m-card'))">Order Now</button></div></div></div>
+        <div class="m-card vis" data-cat="coffee" data-name="Caramel Latte" data-price="750" data-img="https://images.unsplash.com/photo-1570968915860-54d5c301fa9f?w=600&q=80"><div class="m-img-wrap"><img class="m-img" src="https://images.unsplash.com/photo-1570968915860-54d5c301fa9f?w=600&q=80" alt="Caramel Latte" loading="lazy"></div><div class="m-body"><div class="m-cat">Coffee</div><div class="m-name">Caramel Latte</div><div class="m-desc">Smooth espresso, velvety milk, and house-made caramel. Sweet, warming, indulgent.</div><div class="m-foot"><span class="m-price">Rs. 750</span><button class="m-order" onclick="addToCart(this.closest('.m-card'))">Order Now</button></div></div></div>
+        <div class="m-card vis" data-cat="coffee" data-name="Dark Mocha" data-price="800" data-img="https://images.unsplash.com/photo-1578314675249-a6910f80cc4e?w=600&q=80"><div class="m-img-wrap"><img class="m-img" src="https://images.unsplash.com/photo-1578314675249-a6910f80cc4e?w=600&q=80" alt="Dark Mocha" loading="lazy"></div><div class="m-body"><div class="m-cat">Coffee</div><div class="m-name">Dark Mocha</div><div class="m-desc">Belgian dark chocolate meets our finest espresso — a match made in perfection.</div><div class="m-foot"><span class="m-price">Rs. 800</span><button class="m-order" onclick="addToCart(this.closest('.m-card'))">Order Now</button></div></div></div>
+        <!-- Cold -->
+        <div class="m-card vis" data-cat="cold" data-name="Cold Brew" data-price="750" data-img="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=600&q=80"><div class="m-img-wrap"><img class="m-img" src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=600&q=80" alt="Cold Brew" loading="lazy"></div><div class="m-body"><div class="m-cat">Cold Drinks</div><div class="m-name">Cold Brew</div><div class="m-desc">Steeped 18 hours in cold water. Smooth, bold, never bitter — summer's finest companion.</div><div class="m-foot"><span class="m-price">Rs. 750</span><button class="m-order" onclick="addToCart(this.closest('.m-card'))">Order Now</button></div></div></div>
+        <div class="m-card vis" data-cat="cold" data-name="Iced Caramel Macchiato" data-price="850" data-img="https://images.unsplash.com/photo-1601972599720-36938d4ecd31?w=600&q=80"><div class="m-img-wrap"><img class="m-img" src="https://images.unsplash.com/photo-1601972599720-36938d4ecd31?w=600&q=80" alt="Iced Caramel" loading="lazy"></div><div class="m-body"><div class="m-cat">Cold Drinks</div><div class="m-name">Iced Caramel Macchiato</div><div class="m-desc">Layered espresso, vanilla, milk, and golden caramel over ice. As beautiful as it tastes.</div><div class="m-foot"><span class="m-price">Rs. 850</span><button class="m-order" onclick="addToCart(this.closest('.m-card'))">Order Now</button></div></div></div>
+        <!-- Tea -->
+        <div class="m-card vis" data-cat="tea" data-name="Matcha Latte" data-price="700" data-img="https://images.unsplash.com/photo-1515823662972-da6a2e4d3002?w=600&q=80"><div class="m-img-wrap"><img class="m-img" src="https://images.unsplash.com/photo-1515823662972-da6a2e4d3002?w=600&q=80" alt="Matcha" loading="lazy"></div><div class="m-body"><div class="m-cat">Tea</div><div class="m-name">Matcha Latte</div><div class="m-desc">Ceremonial-grade Japanese matcha whisked into steamed oat milk. Earthy, smooth, serene.</div><div class="m-foot"><span class="m-price">Rs. 700</span><button class="m-order" onclick="addToCart(this.closest('.m-card'))">Order Now</button></div></div></div>
+        <div class="m-card vis" data-cat="tea" data-name="Masala Chai" data-price="550" data-img="https://images.unsplash.com/photo-1571934811356-5cc061b6821f?w=600&q=80"><div class="m-img-wrap"><img class="m-img" src="https://images.unsplash.com/photo-1571934811356-5cc061b6821f?w=600&q=80" alt="Chai" loading="lazy"></div><div class="m-body"><div class="m-cat">Tea</div><div class="m-name">Masala Chai</div><div class="m-desc">Black tea, cardamom, ginger, and spices steeped in whole milk. Tradition, perfected.</div><div class="m-foot"><span class="m-price">Rs. 550</span><button class="m-order" onclick="addToCart(this.closest('.m-card'))">Order Now</button></div></div></div>
+        <div class="m-card vis" data-cat="tea" data-name="Earl Grey Supreme" data-price="600" data-img="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&q=80"><div class="m-img-wrap"><img class="m-img" src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&q=80" alt="Earl Grey" loading="lazy"></div><div class="m-body"><div class="m-cat">Tea</div><div class="m-name">Earl Grey Supreme</div><div class="m-desc">Black tea blended with bergamot and lavender. Elegant, aromatic, timeless.</div><div class="m-foot"><span class="m-price">Rs. 600</span><button class="m-order" onclick="addToCart(this.closest('.m-card'))">Order Now</button></div></div></div>
+        <!-- Cakes -->
+        <div class="m-card vis" data-cat="cakes" data-name="LA Cheesecake" data-price="900" data-img="https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=600&q=80"><div class="m-img-wrap"><img class="m-img" src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=600&q=80" alt="Cheesecake" loading="lazy"></div><div class="m-body"><div class="m-cat">Cakes</div><div class="m-name">LA Cheesecake</div><div class="m-desc">New York style, Paragon perfected. Dense, creamy, kissed with a buttery biscuit base.</div><div class="m-foot"><span class="m-price">Rs. 900</span><button class="m-order" onclick="addToCart(this.closest('.m-card'))">Order Now</button></div></div></div>
+        <div class="m-card vis" data-cat="cakes" data-name="Belgian Chocolate Cake" data-price="950" data-img="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=600&q=80"><div class="m-img-wrap"><img class="m-img" src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=600&q=80" alt="Belgian Chocolate" loading="lazy"></div><div class="m-body"><div class="m-cat">Cakes</div><div class="m-name">Belgian Chocolate Cake</div><div class="m-desc">Three layers of rich dark chocolate ganache and moist sponge. Decadence, elevated.</div><div class="m-foot"><span class="m-price">Rs. 950</span><button class="m-order" onclick="addToCart(this.closest('.m-card'))">Order Now</button></div></div></div>
+        <div class="m-card vis" data-cat="cakes" data-name="Red Velvet" data-price="850" data-img="https://images.unsplash.com/photo-1586788680434-30d324b2d46f?w=600&q=80"><div class="m-img-wrap"><img class="m-img" src="https://images.unsplash.com/photo-1586788680434-30d324b2d46f?w=600&q=80" alt="Red Velvet" loading="lazy"></div><div class="m-body"><div class="m-cat">Cakes</div><div class="m-name">Red Velvet</div><div class="m-desc">Velvety crimson layers with cream cheese frosting. A signature classic, reimagined.</div><div class="m-foot"><span class="m-price">Rs. 850</span><button class="m-order" onclick="addToCart(this.closest('.m-card'))">Order Now</button></div></div></div>
+      </div>
+      <footer><div class="f-brand"><div class="n-logo"><div class="n-mark"><span class="n-p">P</span></div><div class="n-brand"><span class="b">Paragon</span><span class="t">Café &amp; Tea Leaf</span></div></div><p>Born in California. Brewed with passion. Served with perfection.</p></div><div class="f-col"><h4>Navigate</h4><ul><li><a onclick="go('home')">Home</a></li><li><a onclick="go('menu')">Menu</a></li><li><a onclick="go('about')">Our Story</a></li><li><a onclick="go('locations')">Locations</a></li></ul></div><div class="f-col"><h4>Hours</h4><ul><li><a>Mon–Fri: 8AM–1AM</a></li><li><a>Sat–Sun: 9AM–1AM</a></li></ul></div><div class="f-col"><h4>Contact</h4><ul><li><a>hello@cafeparagon.pk</a></li><li><a>+92 300 123 4567</a></li></ul></div></footer>
+      <div class="f-btm"><p>© 2026 Café Paragon</p><p style="color:var(--gold)">Where Perfection is Served</p></div>
+    </div><!-- /menu -->
+
+    <!-- ═══════════════════════════ ABOUT ═══════════════════════════ -->
+    <div class="page" id="page-about">
+      <div class="abt-hero">
+        <img class="abt-hero-img" src="https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=1920&q=80" alt="Coffee beans">
+        <div class="abt-hero-cnt">
+          <div style="font-size:10px;letter-spacing:6px;text-transform:uppercase;color:var(--gold);margin-bottom:16px;font-family:'Jost',sans-serif">Our Heritage</div>
+          <h1 style="font-family:'Cormorant Garamond',serif;font-size:clamp(52px,8vw,104px);font-weight:300;color:var(--cream);line-height:.92">The Art of<br><em style="color:var(--gold)">Perfection</em></h1>
+        </div>
+      </div>
+      <div class="abt-body">
+        <div class="abt-imgs">
+          <img class="abt-img1" src="https://images.unsplash.com/photo-1518057111178-44a106bad636?w=800&q=80" alt="Barista">
+          <img class="abt-img2" src="https://images.unsplash.com/photo-1511537190424-bbbab87ac5eb?w=600&q=80" alt="Coffee details">
+        </div>
+        <div class="abt-text">
+          <h2>A story born in<br><em>Southern California</em></h2>
+          <p>Café Paragon was born from a single obsession: the perfect cup. Inspired by California's thriving coffee culture, we set out to bring that same standard of excellence to Pakistan's most discerning coffee lovers.</p>
+          <p>We source our beans directly from single-origin farms in Ethiopia, Colombia, and Guatemala. Every roast is timed to the second. Every barista completes 200 hours of training before they touch your cup.</p>
+          <p>From our first location in Lahore to our growing presence across 12 cities, the mission has never changed — we don't just serve coffee, we serve a moment of perfection.</p>
+          <button class="btn btn-g" onclick="go('locations')" style="margin-top:24px"><span>Find a Location</span></button>
+        </div>
+      </div>
+      <div class="stats">
+        <div class="stat"><div class="stat-n">12</div><div class="stat-l">Locations</div></div>
+        <div class="stat"><div class="stat-n">30+</div><div class="stat-l">Tea Varieties</div></div>
+        <div class="stat"><div class="stat-n">200h</div><div class="stat-l">Barista Training</div></div>
+        <div class="stat"><div class="stat-n">60yr</div><div class="stat-l">Heritage</div></div>
+      </div>
+      <footer><div class="f-brand"><div class="n-logo"><div class="n-mark"><span class="n-p">P</span></div><div class="n-brand"><span class="b">Paragon</span><span class="t">Café &amp; Tea Leaf</span></div></div><p>Born in California. Brewed with passion. Served with perfection.</p></div><div class="f-col"><h4>Navigate</h4><ul><li><a onclick="go('home')">Home</a></li><li><a onclick="go('menu')">Menu</a></li><li><a onclick="go('about')">Our Story</a></li><li><a onclick="go('locations')">Locations</a></li></ul></div><div class="f-col"><h4>Hours</h4><ul><li><a>Mon–Fri: 8AM–1AM</a></li><li><a>Sat–Sun: 9AM–1AM</a></li></ul></div><div class="f-col"><h4>Contact</h4><ul><li><a>hello@cafeparagon.pk</a></li><li><a>+92 300 123 4567</a></li></ul></div></footer>
+      <div class="f-btm"><p>© 2026 Café Paragon</p><p style="color:var(--gold)">Where Perfection is Served</p></div>
+    </div><!-- /about -->
+
+    <!-- ═══════════════════════════ LOCATIONS ═══════════════════════════ -->
+    <div class="page" id="page-locations">
+      <div class="pg-hero">
+        <div class="pg-hero-bg"></div><div class="pg-hero-dots"></div>
+        <div class="pg-ttl"><div class="eye">Find Us</div><h1>Our <em>Locations</em></h1></div>
+      </div>
+      <div class="loc-grid">
+        <div class="loc-card"><div class="loc-city">Lahore</div><div class="loc-area">Packages Mall</div><div class="loc-hrs">Mon–Thu: 10:30AM–11PM<br>Fri–Sun: 10:30AM–12AM</div></div>
+        <div class="loc-card"><div class="loc-city">Lahore</div><div class="loc-area">Gulberg · DHA Phase V · Johar Town</div><div class="loc-hrs">Mon–Fri: 8AM–1AM<br>Sat–Sun: 9AM–1AM</div></div>
+        <div class="loc-card"><div class="loc-city">Lahore</div><div class="loc-area">Downtown Hotel · Thokar Niaz Baig</div><div class="loc-hrs">Mon–Fri: 8AM–1AM<br>Sat–Sun: 9AM–1AM</div></div>
+        <div class="loc-card"><div class="loc-city">Islamabad</div><div class="loc-area">F-6 · F-11 · Elysium Mall · I-8</div><div class="loc-hrs">Mon–Fri: 8AM–1AM<br>Sat–Sun: 9AM–1AM</div></div>
+        <div class="loc-card"><div class="loc-city">Rawalpindi</div><div class="loc-area">Bahria Town</div><div class="loc-hrs">Sun–Thu: 8AM–1AM<br>Fri–Sat: 9AM–1AM</div></div>
+        <div class="loc-card"><div class="loc-city">Karachi</div><div class="loc-area">DHA Phase 6 · Marine Tower</div><div class="loc-hrs">Mon–Fri: 8AM–1AM<br>Sat–Sun: 9AM–1AM</div></div>
+        <div class="loc-card"><div class="loc-city">Karachi</div><div class="loc-area">Tipu Sultan · Jinnah Airport</div><div class="loc-hrs">Mon–Fri: 8AM–1AM<br>Airport: 24 Hours</div></div>
+        <div class="loc-card"><div class="loc-city">Gujranwala</div><div class="loc-area">Main Boulevard</div><div class="loc-hrs">Mon–Sun: 8AM–1AM</div></div>
+        <div class="loc-card"><div class="loc-city">Faisalabad</div><div class="loc-area">D-Ground</div><div class="loc-hrs">Mon–Fri: 8AM–1AM<br>Sat–Sun: 9AM–1AM</div></div>
+        <div class="loc-card"><div class="loc-city">Sialkot</div><div class="loc-area">City Center</div><div class="loc-hrs">Mon–Fri: 8AM–1AM<br>Sat–Sun: 9AM–1AM</div></div>
+      </div>
+      <!-- CONTACT FORM -->
+      <div class="contact-wrap">
+        <div>
+          <div class="s-label">Get In Touch</div>
+          <h2 class="s-title">We'd love to<br><em>hear from you</em></h2>
+          <div class="c-detail"><div class="c-lbl">Email</div><div class="c-val">hello@cafeparagon.pk</div></div>
+          <div class="c-detail"><div class="c-lbl">Phone</div><div class="c-val">+92 300 123 4567</div></div>
+          <div class="c-detail"><div class="c-lbl">Instagram</div><div class="c-val">@cafeparagon</div></div>
+          <div class="c-detail"><div class="c-lbl">Head Office</div><div class="c-val">Gulberg III, Lahore</div></div>
+        </div>
+        <div>
+          <div class="s-label">Reserve a Table</div>
+          <div class="c-form">
+            <div class="fg"><label>Full Name</label><input type="text" placeholder="Your name"></div>
+            <div class="fg"><label>Email</label><input type="email" placeholder="your@email.com"></div>
+            <div class="fg"><label>Preferred Location</label><input type="text" placeholder="e.g. Gulberg, Lahore"></div>
+            <div class="fg"><label>Message</label><textarea placeholder="Tell us about your visit or enquiry..."></textarea></div>
+            <button class="btn btn-g" style="border:none"><span>Send Message</span></button>
+          </div>
+        </div>
+      </div>
+      <footer><div class="f-brand"><div class="n-logo"><div class="n-mark"><span class="n-p">P</span></div><div class="n-brand"><span class="b">Paragon</span><span class="t">Café &amp; Tea Leaf</span></div></div><p>Born in California. Brewed with passion. Served with perfection.</p></div><div class="f-col"><h4>Navigate</h4><ul><li><a onclick="go('home')">Home</a></li><li><a onclick="go('menu')">Menu</a></li><li><a onclick="go('about')">Our Story</a></li><li><a onclick="go('locations')">Locations</a></li></ul></div><div class="f-col"><h4>Hours</h4><ul><li><a>Mon–Fri: 8AM–1AM</a></li><li><a>Sat–Sun: 9AM–1AM</a></li></ul></div><div class="f-col"><h4>Contact</h4><ul><li><a>hello@cafeparagon.pk</a></li><li><a>+92 300 123 4567</a></li></ul></div></footer>
+      <div class="f-btm"><p>© 2026 Café Paragon</p><p style="color:var(--gold)">Where Perfection is Served</p></div>
+    </div><!-- /locations -->
+
+  </div><!-- /app -->
+
+  <!-- ═══════════════════════════ CART SIDEBAR ═══════════════════════════ -->
+  <div class="cart-sidebar" id="cartSidebar">
+    <div class="cart-hdr">
+      <div class="cart-title">Your Cart</div>
+      <button class="cart-close" onclick="toggleCart()">×</button>
+    </div>
+    <div class="cart-body" id="cartBody">
+      <div class="cart-empty">
+        <div class="cart-empty-icon">🛒</div>
+        <p>Your cart is empty</p>
+      </div>
+    </div>
+    <div class="cart-footer" id="cartFooter" style="display:none">
+      <div class="cart-subtotal">
+        <span>Subtotal</span>
+        <span id="cartTotal">Rs. 0</span>
+      </div>
+      <div class="cart-actions">
+        <button class="btn btn-g" onclick="checkout()"><span>Proceed to Checkout</span></button>
+        <button class="btn btn-o" onclick="toggleCart()">Continue Shopping</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════ TOAST ═══════════════════════════ -->
+  <div class="toast" id="toast">
+    <span class="toast-icon">✓</span>
+    <span class="toast-msg" id="toastMsg">Added to cart</span>
+  </div>
+<script src="script.js"></script>
+
+</body>
+</html>
