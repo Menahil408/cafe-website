@@ -456,34 +456,64 @@ html, body {
       .abt-body{grid-template-columns:1fr}
       footer{grid-template-columns:1fr 1fr}
     }
-    @media(max-width:768px){
-      nav{padding:0 24px}
-      .n-links{display:none}
-      .hamburger{display:flex}
-      .sec{padding:80px 24px}
-      .cat-grid{grid-template-columns:1fr}
-      .bs-grid{grid-template-columns:repeat(2,1fr)}
-      .m-grid{grid-template-columns:1fr;padding:40px 24px}
-      .pg-hero{padding-left:24px}
-      .m-tabs{padding:0 24px}
-      .loc-grid{grid-template-columns:1fr;padding:40px 24px}
-      .contact-wrap{grid-template-columns:1fr;padding:40px 24px}
-      footer{grid-template-columns:1fr;padding:40px 24px;gap:40px}
-      .f-btm{padding:20px 24px;flex-direction:column;gap:12px;text-align:center}
-      .abt-body{padding:60px 24px}
-      .abt-hero-cnt{padding:0 24px}
-      
-      /* Hero Title fix for mobile */
-    .pg-hero .pg-tl {
+  @media (max-width: 768px) {
+    nav { padding: 0 24px; }
+    .n-links { display: none; }
+    .hamburger { display: flex; }
+    .sec { padding: 80px 24px; }
+    
+    .cat-grid { grid-template-columns: 1fr; }
+    .bs-grid { grid-template-columns: 1fr; }
+    .m-grid { grid-template-columns: 1fr; padding: 40px 24px; }
+    
+    .pg-hero { padding-left: 24px; }
+    .m-tabs { padding: 0 24px; }
+    .loc-grid { grid-template-columns: 1fr; padding: 40px 24px; }
+    
+    .contact-wrap { grid-template-columns: 1fr; padding: 40px 24px; }
+    footer { grid-template-columns: 1fr; padding: 40px 24px; gap: 40px; }
+    
+    .f-btm { 
+        padding: 20px 24px; 
+        flex-direction: column; 
+        gap: 12px; 
+        text-align: center; 
+    }
+
+    .abt-body { padding: 60px 24px; }
+    .abt-hero-cnt { padding: 0 24px; }
+    .story-txt { padding: 60px 24px; }
+
+    /* Hero Title fix for mobile */
+    .pg-hero .pg-tl, .h-title {
         font-size: 2.8rem !important;
         line-height: 1.2;
         width: 100%;
     }
 
-    /* Grid stretch fix */
-    .cat-grid, .bs-grid {
+    /* Grid and Internal Pages Fix */
+    .cat-grid, .bs-grid, #page-menu, #page-about, #page-locations {
         width: 100% !important;
-        overflow: hidden;
+        overflow-x: hidden !important;
     }
-      .story-txt{padding:60px 24px}
+
+    /* Image responsiveness */
+    .abt-hero-cnt, .abt-img-wrap, .abt-img {
+        width: 100% !important;
+        max-width: 100% !important;
+        height: auto !important;
     }
+
+    /* Locations Cards Fix */
+    .loc-grid {
+        grid-template-columns: 1fr !important;
+        width: 100% !important;
+        padding: 20px !important;
+    }
+
+    /* Global padding fix for mobile */
+    section {
+        max-width: 100vw !important;
+        box-sizing: border-box !important;
+    }
+}
