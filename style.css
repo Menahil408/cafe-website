@@ -1,4 +1,17 @@
- :root {
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; 
+}
+
+html, body {
+    overflow-x: hidden; 
+    width: 100%;
+    position: relative;
+}
+
+:root {
       --bg:   #06040200;
       --bg-s: #080503;
       --bg2:  #0f0a06;
@@ -459,5 +472,18 @@
       .f-btm{padding:20px 24px;flex-direction:column;gap:12px;text-align:center}
       .abt-body{padding:60px 24px}
       .abt-hero-cnt{padding:0 24px}
+      
+      /* Hero Title fix for mobile */
+    .pg-hero .pg-tl {
+        font-size: 2.8rem !important;
+        line-height: 1.2;
+        width: 100%;
+    }
+
+    /* Grid stretch fix */
+    .cat-grid, .bs-grid {
+        width: 100% !important;
+        overflow: hidden;
+    }
       .story-txt{padding:60px 24px}
     }
